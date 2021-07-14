@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import LoginContext from "./component/context/LoginContext";
+import { router } from "./component/router/router";
+
+
 
 function App() {
+  const [login, setLogin] = useState(false);
+  const logout = () => {
+    setLogin(false);
+  };
+
+  const changeLogin = () => {
+    setLogin(true);
+  };
+
+  const loginDetails = {
+    login: login,
+    logout: logout,
+    changeLogin: changeLogin,
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <LoginContext.Provider value={loginDetails}>
+      {router}
+      </LoginContext.Provider>
   );
 }
 
